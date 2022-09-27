@@ -11,11 +11,11 @@ useEffect(()=>{ axios.get('https://fakestoreapi.com/products')
 })},[])
 // console.log(data);
   return (
-   <Grid container >
+   <Grid container  >
    {
     data.map((apiData)=>{
       return(
-        <Grid md={3} sm={6} xs={12} item sx={{
+        <Grid  md={2} sm={4} xs={12} item sx={{
           boxShadow:3,
           m:1,
           borderRadius:4,
