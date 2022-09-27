@@ -1,8 +1,10 @@
 import { Grid } from "@mui/material";
 import {Box} from "@mui/material";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useEffect,useState } from "react";
   function Products() {
+ 
     const [data,setData]=useState([])
 useEffect(()=>{ axios.get('https://fakestoreapi.com/products')
 .then((response)=>{
@@ -23,12 +25,13 @@ useEffect(()=>{ axios.get('https://fakestoreapi.com/products')
             boxShadow:7
           }
         }}>
-          <Box component='img' src={apiData.image} sx={
+            <Link to={`/cart/${apiData.id}`}>   <Box component='img' src={apiData.image} sx={
             {
               width:"80%",
               
             }
-          }></Box>
+          }></Box></Link>
+         
         </Grid>
       )
     })
