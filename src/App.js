@@ -11,27 +11,29 @@ useEffect(()=>{ axios.get('https://fakestoreapi.com/products')
 })},[])
 // console.log(data);
   return (
-    <Grid container>
-     
-   {data.map((val)=>{
-    return(
-     
- <Grid key={val.title} md={2} xs={12} sm={6} item sx={{
-  boxShadow: 3,
- p: 1,
- m: 1,
- borderRadius: 2,
- textAlign: 'center',
- fontSize: '0.875rem',
- fontWeight: '700', "&:hover": {
-  boxShadow: 7,
-},}}>
-         <Box  component='img' src={val.image} sx={{width:"80%"}} />
-      </Grid>
-     
-    )
-   })}
-    </Grid>
+   <Grid container >
+   {
+    data.map((apiData)=>{
+      return(
+        <Grid md={3} sm={6} xs={12} item sx={{
+          boxShadow:3,
+          m:1,
+          borderRadius:4,
+          '&:hover':{
+            boxShadow:7
+          }
+        }}>
+          <Box component='img' src={apiData.image} sx={
+            {
+              width:"80%",
+              
+            }
+          }></Box>
+        </Grid>
+      )
+    })
+   }
+   </Grid>
   );
 }
 
