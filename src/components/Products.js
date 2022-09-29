@@ -24,7 +24,7 @@ useEffect(()=>{ axios.get('https://fakestoreapi.com/products')
           '&:hover':{
             boxShadow:7
           }
-        }}>
+        }} key={apiData.id}>
             <Link to={`/cart/${apiData.id}`}>   <Box component='img' src={apiData.image} sx={
             {
               width:"80%",
