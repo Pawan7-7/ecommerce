@@ -18,13 +18,28 @@ export const Cart = () => {
     })},[id])
     
   return (
-    <Grid container sx={{py:"100px",pl:"40px"}} >
+    <Grid container sx={{py:"100px",pl:{
+      xs:10,
+      sm:20,
+      md:30,
+      lg:40,
+    }}} >
       <Grid item >
        <Stack direction='row'>
-       <Box component='img' src={data.image} sx={{width:"200px"}}></Box>
+       <Box component='img' src={data.image} sx={{width:{
+        xs:100,
+        sm:100,
+        md:200,
+        lg:200,
+       }}}></Box>
         <Box >
        <Stack direction='column' >
-       <Typography sx={{fontSize:"30px"}} sx={{width:"200px"}}>{data.title}</Typography>
+       <Typography sx={{fontSize:{
+        xs:15,
+        sm:20,
+        md:30,
+        lg:40,
+       }}}>{data.title}</Typography>
         <Typography sx={{fontSize:"28px",color:"orange",width:"200px"}}  >${data.price}</Typography>
         <Stack direction='row' sx={{width:"80%"}}>
           <Button startIcon={<AddIcon/>} variant='outlined'/>
