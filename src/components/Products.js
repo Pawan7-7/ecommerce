@@ -1,21 +1,24 @@
 import { Grid } from "@mui/material";
 import {Box} from "@mui/material";
-import axios from "axios";
+import { getProducts } from "./Redux/features/productSlice";
+
+
 import { Link } from "react-router-dom";
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
   function Products() {
  
-    const [data,setData]=useState([])
-useEffect(()=>{ axios.get('https://fakestoreapi.com/products')
-.then((response)=>{
- console.log(response.data);
- setData(response.data)
-})},[])
-// console.log(data);
+const dispatch =useDispatch()
+useEffect(()=>{
+  dispatch(getProducts())
+})
+const {loading,products}=useSelector((state)=>state.products)
+
+
   return (
    <Grid container  >
    {
-    data.map((apiData)=>{
+    products.map((apiData)=>{
       return(
         <Grid  md={2} sm={4} xs={12} item sx={{
           boxShadow:3,
