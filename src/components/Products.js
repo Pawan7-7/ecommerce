@@ -2,6 +2,8 @@ import { Grid } from "@mui/material";
 import {Box} from "@mui/material";
 import { getProducts } from "./Redux/features/productSlice";
 
+import LinearProgress from '@mui/material/LinearProgress';
+
 
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -11,9 +13,16 @@ import { useDispatch, useSelector } from "react-redux";
 const dispatch =useDispatch()
 useEffect(()=>{
   dispatch(getProducts())
-})
+},[])
 const {loading,products}=useSelector((state)=>state.products)
 
+if (loading){
+  return (
+    <Box sx={{ width: '100%' }}>
+    <LinearProgress />
+  </Box>
+  );
+}
 
   return (
    <Grid container  >

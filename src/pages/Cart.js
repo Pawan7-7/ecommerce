@@ -6,7 +6,12 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useState,useEffect } from 'react';
 import { Box } from '@mui/material';
+import { add,sub } from '../components/Redux/features/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 export const Cart = () => {
+  const count =useSelector((state)=>state.products.count)
+  const dispatch=useDispatch()
     let params = useParams();
     console.log(params);
     let id = params.id;
@@ -40,11 +45,11 @@ export const Cart = () => {
         md:30,
         lg:40,
        }}}>{data.title}</Typography>
-        <Typography sx={{fontSize:"28px",color:"orange",width:"200px"}}  >${data.price}</Typography>
+        <Typography sx={{fontSize:"28px",color:"orange",width:"200px"}}  >${data.price*count}</Typography>
         <Stack direction='row' sx={{width:"80%"}}>
-          <Button startIcon={<AddIcon/>} variant='outlined'/>
-          <Box component='span'>1</Box>
-          <Button startIcon={<RemoveIcon/>} variant='outlined'/>
+          <Button startIcon={<AddIcon/>} variant='outlined' onClick={()=>dispatch(add())}/>
+          <Box component='span'>{count}</Box>
+          <Button startIcon={<RemoveIcon/>} variant='outlined'  onClick={()=>dispatch(sub())}/>
         </Stack>
         <Button color='success' variant='contained' sx={{width:"150px",my:"5%"}} >Buy Now</Button>
        </Stack>
