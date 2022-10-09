@@ -22,6 +22,7 @@ export const Cart = () => {
      setData(response.data)
     })},[id])
     
+if (count>=0){
   return (
     <Grid container sx={{py:"100px",pl:{
       xs:10,
@@ -62,4 +63,12 @@ export const Cart = () => {
       </Grid>
     </Grid>
   )
+}
+else{
+  return(
+   <div>
+    {dispatch(add())}
+   </div>
+  )
+}
 }
