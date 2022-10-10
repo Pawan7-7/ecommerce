@@ -8,8 +8,23 @@ import { useState,useEffect } from 'react';
 import { Box } from '@mui/material';
 import { add,sub } from '../components/Redux/features/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import Modal from '@mui/material/Modal';
 
 export const Cart = () => {
+  const style = {
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const count =useSelector((state)=>state.products.count)
   const dispatch=useDispatch()
     let params = useParams();
@@ -24,7 +39,9 @@ export const Cart = () => {
     
 if (count>=0){
   return (
-    <Grid container sx={{py:"100px",pl:{
+
+    <div>
+<Grid container sx={{py:"100px",pl:{
       xs:10,
       sm:20,
       md:30,
@@ -52,7 +69,12 @@ if (count>=0){
           <Box component='span'>{count}</Box>
           <Button startIcon={<RemoveIcon/>} variant='outlined'  onClick={()=>dispatch(sub())}/>
         </Stack>
-        <Button color='success' variant='contained' sx={{width:"150px",my:"5%"}} >Buy Now</Button>
+        <Stack direction='row'>
+        <Button color='success' variant='contained' sx={{width:"150px",my:"5%"}} onClick={handleOpen}>Buy Now</Button>
+        <Button color='warning'  variant='contained' sx={{width:"150px",my:"5%",ml:"1%"}} onClick={handleOpen}>Add to Cart</Button>
+
+        </Stack>
+        
        </Stack>
         
         </Box>
@@ -61,7 +83,25 @@ if (count>=0){
        
        </Stack>
       </Grid>
+  
     </Grid>
+    <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+    
   )
 }
 else{
