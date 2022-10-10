@@ -86,7 +86,7 @@ if (count>=0){
         md:30,
         lg:40,
        }}}>{data.title}</Typography>
-        <Typography sx={{fontSize:"28px",color:"orange",width:"200px"}}  >${data.price*count}</Typography>
+        <Typography sx={{fontSize:"28px",color:"orange",width:"200px"}}  >${(data.price*count).toFixed(2) }</Typography>
         <Stack direction='row' sx={{width:"80%"}}>
           <Button startIcon={<AddIcon/>} variant='outlined' onClick={()=>dispatch(add())}/>
           <Box component='span'>{count}</Box>
