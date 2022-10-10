@@ -9,17 +9,29 @@ import { Box } from '@mui/material';
 import { add,sub } from '../components/Redux/features/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '@mui/material/Modal';
+import * as Yup from 'yup';
 import {
 Checkbox,
 TextField,
 FormControlLabel,
 
 } from '@mui/material';
-
+import { Formik } from 'formik';
+const SignupSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  password: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
+});
 export const Cart = () => {
   const [checked, setChecked] = React.useState(true);
 
-  const handleChange = (event) => {
+  const handleChange1 = (event) => {
     setChecked(event.target.checked);
   };
   const style = {
@@ -102,7 +114,22 @@ if (count>=0){
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Formik 
+         initialValues={{
+          firstName: '',
+          lastName: '',
+          email: '',
+        }}
+        
+        validationSchema={SignupSchema}
+        onSubmit={values => {
+          // same shape as initial values
+          console.log(values);
+        }}>
+        {({ errors, touched,values, handleChange, handleSubmit }) => (
+  
+    <form onSubmit={handleSubmit} >
+      <Box sx={style}>
         <Grid
           container
           spacing={3}
@@ -111,17 +138,22 @@ if (count>=0){
           alignItems={'center'}
         >
           <Grid item xs={12}>
-            <TextField label="Username"></TextField>
+
+            <TextField label="Username" name="username"  onChange={handleChange}  value={values.username} ></TextField>
+          {touched.username && errors.username && <div color='red'>{errors.username}</div>}
           </Grid>
           <Grid item xs={12}>
-            <TextField label="Password" type={'password'}></TextField>
+
+            <TextField label="Password" type='password' name="password" onChange={handleChange}
+                  value={values.password}></TextField>
+          {touched.password && errors.password && <div>{errors.password}</div>}
           </Grid>
           <Grid item xs={12}>
             <FormControlLabel
               control={
                 <Checkbox
                   checked={checked}
-                  onChange={handleChange}
+                  onChange={handleChange1}
                   label={'Keep me logged in'}
                   inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
@@ -130,11 +162,16 @@ if (count>=0){
             />
           </Grid>
           <Grid item xs={12}>
-            <Button  color='warning'> Login </Button>
-            <Button  color='warning'> Register </Button>
+            <Button  color='warning' type='submit'> Login </Button>
+            <Button  color='warning' type='submit'> Register </Button>
           </Grid>
         </Grid>
         </Box>
+      </form>
+  
+)}
+        </Formik>
+     
       </Modal>
     </div>
     
@@ -148,3 +185,4 @@ else{
   )
 }
 }
+
