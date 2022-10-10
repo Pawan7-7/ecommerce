@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, Stack, Typography } from '@mui/material';
+import { Button,  Grid, Stack, Typography} from '@mui/material';
 import { useParams } from 'react-router-dom'
 import axios from "axios";
 import AddIcon from '@mui/icons-material/Add';
@@ -9,8 +9,19 @@ import { Box } from '@mui/material';
 import { add,sub } from '../components/Redux/features/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '@mui/material/Modal';
+import {
+Checkbox,
+TextField,
+FormControlLabel,
+
+} from '@mui/material';
 
 export const Cart = () => {
+  const [checked, setChecked] = React.useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
   const style = {
     position: 'absolute',
     top: '40%',
@@ -92,12 +103,37 @@ if (count>=0){
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+        <Grid
+          container
+          spacing={3}
+          direction={'column'}
+          justify={'center'}
+          alignItems={'center'}
+        >
+          <Grid item xs={12}>
+            <TextField label="Username"></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField label="Password" type={'password'}></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={checked}
+                  onChange={handleChange}
+                  label={'Keep me logged in'}
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
+              }
+              label="Keep me logged in"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button  color='warning'> Login </Button>
+            <Button  color='warning'> Register </Button>
+          </Grid>
+        </Grid>
         </Box>
       </Modal>
     </div>
