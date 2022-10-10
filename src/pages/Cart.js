@@ -51,7 +51,7 @@ export const Cart = () => {
   const count =useSelector((state)=>state.products.count)
   const dispatch=useDispatch()
     let params = useParams();
-    console.log(params);
+    // console.log(params);
     let id = params.id;
     const [data,setData]=useState([])
     useEffect(()=>{ axios.get(`https://fakestoreapi.com/products/${id}`)
@@ -116,8 +116,8 @@ if (count>=0){
       >
         <Formik 
          initialValues={{
-          firstName: '',
-          lastName: '',
+          username: '',
+          password: '',
           email: '',
         }}
         
@@ -143,11 +143,19 @@ if (count>=0){
           {touched.username && errors.username && <div color='red'>{errors.username}</div>}
           </Grid>
           <Grid item xs={12}>
+          <TextField label="Email" type='email' name="email" onChange={handleChange}
+                  value={values.email}></TextField>
+          {touched.email && errors.email && <div>{errors.email}</div>}
+          </Grid>
+          <Grid item xs={12}>
 
             <TextField label="Password" type='password' name="password" onChange={handleChange}
                   value={values.password}></TextField>
           {touched.password && errors.password && <div>{errors.password}</div>}
+
+        
           </Grid>
+          
           <Grid item xs={12}>
             <FormControlLabel
               control={
