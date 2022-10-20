@@ -5,10 +5,12 @@ import { Cart } from "./pages/Cart";
 import { Navbar } from "./components/Navbar";
   function App() {
    
-
+const getData=(value)=>{
+  console.log("hello",  value)
+}
   return (
     <>
-  <Navbar />
+  <Navbar onChange={getData}/>
   
     <Routes>
 <Route path="/" element={<Home/>}/>
