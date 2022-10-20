@@ -28,8 +28,10 @@ function Products({data}) {
         if(data==""){
           return val;
         }else if(val.title.toLowerCase().includes(data.toLowerCase())){
+          // console.log(val)
           return val;
         }
+        
       }).map((apiData) => {
         return (
           <Grid
