@@ -6,7 +6,8 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-function Products() {
+function Products({data}) {
+  console.log(data);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
@@ -23,7 +24,13 @@ function Products() {
 
   return (
     <Grid container>
-      {products.map((apiData) => {
+      {products.filter((val)=>{
+        if(data==""){
+          return val;
+        }else if(val.title.toLowerCase().includes(data.toLowerCase())){
+          return val;
+        }
+      }).map((apiData) => {
         return (
           <Grid
             md={2}
