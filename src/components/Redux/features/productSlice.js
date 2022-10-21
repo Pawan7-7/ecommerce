@@ -3,7 +3,8 @@ import axios from "axios";
 const initialState={
     loading:false,
     products:[],
-    count:0
+    count:0,
+    authprops:[],
 }
 export const getProducts=createAsyncThunk("posts/getProducts", async()=>{
  const response = await axios.get('https://fakestoreapi.com/products')
@@ -18,7 +19,11 @@ const productSlice =createSlice({
         }, 
         sub:(state)=>{
             state.count=state.count-1
-            }
+            },
+        auth:(state,action)=>{
+            state.authprops.push(action.payload)
+
+        }
 
     },
     extraReducers:{
@@ -34,5 +39,5 @@ const productSlice =createSlice({
 
     }
 })
-export const {add,sub}=productSlice.actions
+export const {add,sub,auth}=productSlice.actions
 export default productSlice.reducer

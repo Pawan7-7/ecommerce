@@ -10,6 +10,7 @@ import { add,sub } from '../components/Redux/features/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '@mui/material/Modal';
 import * as Yup from 'yup';
+import { auth } from '../components/Redux/features/productSlice';
 import {
 Checkbox,
 TextField,
@@ -110,6 +111,7 @@ if (count>=0){
     </Grid>
     <Modal
         open={open}
+        
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -125,10 +127,14 @@ if (count>=0){
         onSubmit={values => {
           // same shape as initial values
           console.log(values);
+          dispatch(auth(values))
         }}>
         {({ errors, touched,values, handleChange, handleSubmit }) => (
   
-    <form onSubmit={handleSubmit} >
+    <form  onSubmit={()=>{
+      handleSubmit();
+      // setOpen(false)
+    }}  >
       <Box sx={style}>
         <Grid
           container
@@ -163,14 +169,13 @@ if (count>=0){
                   checked={checked}
                   onChange={handleChange1}
                   label={'Keep me logged in'}
-                  inputProps={{ 'aria-label': 'primary checkbox' }}
-                />
+                  inputProps={{ 'aria-label': 'primary checkbox' }}/>
               }
               label="Keep me logged in"
             />
           </Grid>
           <Grid item xs={12}>
-            <Button  color='warning' type='submit'> Login </Button>
+            <Button  color='warning' type='submit' > Login </Button>
             <Button  color='warning' type='submit'> Register </Button>
           </Grid>
         </Grid>
