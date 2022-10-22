@@ -11,7 +11,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 // import { NotificationAdd } from '@mui/icons-material';
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
@@ -48,6 +48,7 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 
 export const Navbar = (props) => {
+  const navigate=useNavigate()
   const auth=useSelector((state)=>state.products.authprops)
   console.log(auth);
   const newAuth=auth[0]
@@ -63,7 +64,7 @@ const handleClick=()=>{
   return (
     <AppBar position="sticky">
       <NavToolBar>
-        <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
+        <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }} onClick={()=>navigate('/')}>
           .Store
         </Typography>
         <LocalConvenienceStoreIcon
@@ -90,7 +91,7 @@ const handleClick=()=>{
             sx={{ width: 30, height: 30 }}
             src="https://media-exp1.licdn.com/dms/image/C5603AQEWm91nTKq5VA/profile-displayphoto-shrink_800_800/0/1648607173364?e=1671667200&v=beta&t=i1s4B3c6MsQ95lR17mcNTdWoyYLoGAWjoVcgQ16_dtY"
                  onClick={handleClick}/>
-          <Typography variant="h6">KAL</Typography>
+          <Typography variant="h6" >KAL</Typography>
 
           <Menu
             id="demo-positioned-menu"
